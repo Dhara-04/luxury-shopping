@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability - Scartch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: #c19a6b; /* Gold tone for luxury */
+            --text-color: #333;
+            --light-bg: #f5f7f9;
+            --white: #ffffff;
+            --light-gray: #ecf0f1;
+            --gray: #bdc3c7;
+            --dark-gray: #7f8c8d;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --gold-gradient: linear-gradient(135deg, #c19a6b 0%, #d4af37 100%);
+        }
+
+        .dark-mode {
+            --primary-color: #c19a6b; /* Gold in dark mode */
+            --secondary-color: #2c3e50;
+            --text-color: #ecf0f1;
+            --light-bg: #1a1f29;
+            --white: #12161e;
+            --light-gray: #2c3e50;
+            --gray: #34495e;
+            --dark-gray: #bdc3c7;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Sustainability Content */
+        .sustainability-content {
+            padding: 80px 0;
+        }
+
+        .sustainability-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .sustainability-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .sustainability-intro p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            line-height: 1.8;
+        }
+
+        /* Initiatives Section */
+        .initiatives-section {
+            padding: 60px 0;
+            background: var(--light-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .initiatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .initiative-card {
+            background: var(--white);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .initiative-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .initiative-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .initiative-content {
+            padding: 25px;
+        }
+
+        .initiative-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .initiative-description {
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            padding: 80px 0;
+        }
+
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .progress-card {
+            text-align: center;
+            padding: 30px;
+            background: var(--light-bg);
+            border-radius: 0;
+            transition: var(--transition);
+        }
+
+        .progress-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .progress-label {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* Commitment Section */
+        .commitment-section {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .commitment-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .commitment-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .commitment-content p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .commitment-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--accent-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 500;
+            transition: var(--transition);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 14px;
+            border: 2px solid var(--accent-color);
+        }
+
+        .commitment-btn:hover {
+            background: transparent;
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--light-gray);
+            padding: 80px 0 20px;
+            transition: var(--transition);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+            display: block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: 50%;
+        }
+
+        .social-links a:hover {
+            color: var(--white);
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray);
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1) rotate(180deg);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                order: 1;
+            }
+            
+            .logo {
+                order: 2;
+                margin-left: 15px;
+            }
+            
+            .search-container {
+                order: 4;
+                max-width: 100%;
+                margin: 20px 0 0;
+            }
+            
+            nav {
+                order: 5;
+                width: 100%;
+                margin-top: 20px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .user-actions {
+                order: 3;
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 60px 0 30px;
+            }
+            
+            .initiatives-grid,
+            .progress-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 22px;
+            }
+            
+            .user-actions {
+                gap: 10px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Our Sustainability Commitment</h1>
+                <p class="page-description">Discover how we're working to create a more sustainable future for luxury fashion</p>
+            </div>
+        </section>
+
+        <!-- Sustainability Intro -->
+        <section class="sustainability-content">
+            <div class="container">
+                <div class="sustainability-intro">
+                    <h2>Luxury with Responsibility</h2>
+                    <p>At Scartch Luxury, we believe that true luxury is sustainable. We are committed to minimizing our environmental impact, promoting ethical practices, and creating products that stand the test of time—both in quality and in conscience.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Initiatives Section -->
+        <section class="initiatives-section">
+            <div class="container">
+                <h2 class="section-title">Our Initiatives</h2>
+                <div class="initiatives-grid">
+                    <div class="initiative-card">
+                        <img src="https://images.unsplash.com/photo-1491147334573-44cbb4602074?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ethical Sourcing" class="initiative-image">
+                        <div class="initiative-content">
+                            <h3 class="initiative-title">Ethical Sourcing</h3>
+                            <p class="initiative-description">We partner with suppliers who share our commitment to fair labor practices, safe working conditions, and environmental responsibility throughout our supply chain.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="initiative-card">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sustainable Materials" class="initiative-image">
+                        <div class="initiative-content">
+                            <h3 class="initiative-title">Sustainable Materials</h3>
+                            <p class="initiative-description">We're increasing our use of organic, recycled, and innovative materials that reduce environmental impact without compromising on quality or luxury.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="initiative-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D12AQEMxf6K6xnLSQ/article-cover_image-shrink_720_1280/B4DZUPnNU3HkAI-/0/1739723693109?e=2147483647&v=beta&t=IR9fhY4ZoASfCizPOHPrB_4Bu6j55LS6-tqdbjfDlZU" alt="Circular Economy" class="initiative-image">
+                        <div class="initiative-content">
+                            <h3 class="initiative-title">Circular Economy</h3>
+                            <p class="initiative-description">We've implemented repair, resale, and recycling programs to extend the life of our products and reduce waste in the fashion industry.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section class="progress-section">
+            <div class="container">
+                <h2 class="section-title">Our Progress</h2>
+                <div class="progress-grid">
+                    <div class="progress-card">
+                        <div class="progress-number">74%</div>
+                        <div class="progress-label">of materials from sustainable sources</div>
+                    </div>
+                    
+                    <div class="progress-card">
+                        <div class="progress-number">62%</div>
+                        <div class="progress-label">reduction in carbon emissions since 2018</div>
+                    </div>
+                    
+                    <div class="progress-card">
+                        <div class="progress-number">89%</div>
+                        <div class="progress-label">of products designed for circularity</div>
+                    </div>
+                    
+                    <div class="progress-card">
+                        <div class="progress-number">100%</div>
+                        <div class="progress-label">of facilities powered by renewable energy</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commitment Section -->
+        <section class="commitment-section">
+            <div class="container">
+                <div class="commitment-content">
+                    <h2>Our Future Commitment</h2>
+                    <p>By 2025, we aim to achieve carbon neutrality across all our operations, source 100% of our materials sustainably, and ensure that every product in our collection contributes to a circular economy. We believe that luxury and sustainability are not mutually exclusive—they are essential partners in creating a better future.</p>
+                    <a href="suns_return.html" class="commitment-btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="store_policy.html">Store Policy</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Scartch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const icon = darkModeToggle.querySelector('i');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+
+            // Check for saved user preference or system preference
+            const savedMode = localStorage.getItem('darkMode');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Apply dark mode if preferred or system prefers dark (and no preference set)
+            if (savedMode === 'enabled' || (!savedMode && systemPrefersDark)) {
+                body.classList.add('dark-mode');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+
+            // Toggle dark mode
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                
+                const isDarkMode = body.classList.contains('dark-mode');
+                updateDarkModeIcon(isDarkMode);
+                
+                // Save user preference
+                localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            });
+
+            // Update icon based on current mode
+            function updateDarkModeIcon(isDarkMode) {
+                if (isDarkMode) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    darkModeToggle.setAttribute('aria-label', 'Toggle light mode');
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    darkModeToggle.setAttribute('aria-label', 'Toggle dark mode');
+                }
+            }
+
+            // Listen for system preference changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                // Only respond if user hasn't set a preference
+                if (!localStorage.getItem('darkMode')) {
+                    if (e.matches) {
+                        body.classList.add('dark-mode');
+                        icon.classList.replace('fa-moon', 'fa-sun');
+                    } else {
+                        body.classList.remove('dark-mode');
+                        icon.classList.replace('fa-sun', 'fa-moon');
+                    }
+                }
+            });
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                
+                if (mainNav.classList.contains('active')) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

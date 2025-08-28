@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal | Your Brand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-dark: #3730A3;
+      --secondary: #7C3AED;
+      --accent: #EC4899;
+      --dark: #1F2937;
+      --gray-dark: #4B5563;
+      --gray-medium: #9CA3AF;
+      --gray-light: #F3F4F6;
+      --light: #F9FAFB;
+      --bg-color: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --border-color: rgba(0,0,0,0.05);
+    }
+    [data-theme="dark"] {
+      --primary: #818CF8;
+      --primary-dark: #6366F1;
+      --secondary: #A78BFA;
+      --accent: #F472B6;
+      --dark: #E5E7EB;
+      --gray-dark: #D1D5DB;
+      --gray-medium: #9CA3AF;
+      --gray-light: #1F2937;
+      --light: #111827;
+      --bg-color: #111827;
+      --text-color: #E5E7EB;
+      --card-bg: #1F2937;
+      --border-color: rgba(255,255,255,0.05);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      padding-bottom: 80px; /* Space for theme toggle */
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .theme-toggle i {
+      font-size: 1.3rem;
+      color: var(--text-color);
+    }
+    .theme-toggle .fa-sun { color: #F59E0B; }
+    .theme-toggle .fa-moon { color: #6366F1; }
+    header {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 3px;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.75rem;
+      font-weight: 400;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--gray-dark);
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2.5rem;
+      padding: 4rem 0;
+    }
+    .journal-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: all 0.4s;
+      border: 1px solid var(--border-color);
+    }
+    .journal-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+      border-color: var(--primary);
+    }
+    .card-image { height: 220px; }
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .journal-card:hover .card-image img { transform: scale(1.05); }
+    .card-content { padding: 2rem; }
+    .entry-date {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+    }
+    .entry-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.75rem;
+      margin: 0 0 1.25rem 0;
+      color: var(--text-color);
+    }
+    .entry-excerpt {
+      font-size: 1rem;
+      color: var(--gray-dark);
+      margin-bottom: 2rem;
+    }
+    .read-more {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .read-more:hover { background: var(--primary-dark); }
+    footer {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--gray-dark);
+      font-size: 0.95rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .footer-links a {
+      color: var(--gray-dark);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--primary); }
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .journal-grid { grid-template-columns: 1fr; }
+      .card-image { height: 180px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header data-aos="fade-up">
+      <h1>Journal</h1>
+      <p class="subtitle">Insights, experiences, and reflections from our creative journey</p>
+    </header>
+
+    <div class="journal-grid">
+      <article class="journal-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643" alt="Creative workspace">
+        </div>
+        <div class="card-content">
+          <div class="entry-date">August 14, 2023</div>
+          <h2 class="entry-title">Embarking on a New Creative Chapter</h2>
+          <p class="entry-excerpt">Exploring the intersection of design and technology as we begin documenting our process...</p>
+          <a href="#" class="read-more">Continue Reading</a>
+        </div>
+      </article>
+
+      <article class="journal-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="Design system">
+        </div>
+        <div class="card-content">
+          <div class="entry-date">August 10, 2023</div>
+          <h2 class="entry-title">Design Systems & Visual Language</h2>
+          <p class="entry-excerpt">Developing a cohesive design system that scales across all platforms while maintaining brand identity...</p>
+          <a href="#" class="read-more">Continue Reading</a>
+        </div>
+      </article>
+
+      <article class="journal-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="Overcoming creative block">
+        </div>
+        <div class="card-content">
+          <div class="entry-date">August 5, 2023</div>
+          <h2 class="entry-title">Overcoming Creative Block</h2>
+          <p class="entry-excerpt">Strategies and techniques we employ to reignite creativity when facing mental blocks...</p>
+          <a href="#" class="read-more">Continue Reading</a>
+        </div>
+      </article>
+    </div>
+
+    <footer data-aos="fade-up">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p>© 2023 Your Brand. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Theme Toggle (only right side button remains) -->
+  <div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-sun"></i>
+    <i class="fas fa-moon" style="display: none;"></i>
+  </div>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, easing: 'ease-out-quart', once: true, offset: 100 });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcons = themeToggle.querySelectorAll('i');
+    const body = document.body;
+    const savedTheme = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+
+    function setTheme(theme) {
+      body.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        themeIcons[0].style.display = 'none';
+        themeIcons[1].style.display = 'block';
+      } else {
+        themeIcons[0].style.display = 'block';
+        themeIcons[1].style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

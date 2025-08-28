@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Now - Scartch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* CSS Variables for Theming */
+        :root {
+            /* Light Theme Variables */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f1f2f6;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #6c757d;
+            --accent-color: #c19a6b;
+            --accent-hover: #a5825d;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #f8f9fa;
+            --overlay: rgba(0, 0, 0, 0.5);
+            --sale-banner: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            --filter-bg: #ffffff;
+        }
+
+        .dark-mode {
+            /* Dark Theme Variables */
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2d2d2d;
+            --text-primary: #f1f1f1;
+            --text-secondary: #cccccc;
+            --text-muted: #8a8a8a;
+            --accent-color: #d4af37;
+            --accent-hover: #c19a6b;
+            --border-color: #3d3d3d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #1a1a1a;
+            --overlay: rgba(0, 0, 0, 0.7);
+            --sale-banner: linear-gradient(135deg, #8b0000 0%, #660000 100%);
+            --filter-bg: #2d2d2d;
+        }
+
+        /* Shop Now Page Specific Styles */
+        .shop-hero {
+            padding: 3rem 0;
+            text-align: center;
+            background: linear-gradient(var(--overlay), var(--overlay)), 
+                        url('https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: white;
+        }
+
+        .shop-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .shop-hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .shop-hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+        }
+
+        .breadcrumb span {
+            margin: 0 0.5rem;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background-color: var(--bg-secondary);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--filter-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            min-width: 180px;
+        }
+
+        .view-options {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            padding: 0.5rem;
+            background-color: var(--filter-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .view-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background-color: var(--overlay);
+            transition: bottom 0.3s ease;
+        }
+
+        .product-actions a i {
+            color: var(--accent-color);
+        }
+
+        .product-actions a:hover i {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .product-card:hover .product-actions {
+            bottom: 0;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 50%;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .action-btn:hover a {
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-brand {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .original-price {
+            font-size: 0.9rem;
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .stars {
+            color: #ffc107;
+        }
+
+        .rating-count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination-btn:hover, .pagination-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background-color: var(--bg-secondary);
+            padding: 5rem 0;
+            margin: 5rem 0;
+        }
+
+        .newsletter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-subtitle {
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px 0 0 4px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .newsletter-form button {
+            padding: 1rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            padding: 4rem 0 2rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-tertiary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 0.8rem;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle i {
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .search-container {
+                order: 3;
+                flex: 0 0 100%;
+                margin: 1rem 0 0;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .shop-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .view-options {
+                align-self: flex-end;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .shop-hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .filter-select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Shop Hero Section -->
+        <section class="shop-hero">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <span>Shop Now</span>
+                </div>
+                <div class="shop-hero-content">
+                    <h1 class="shop-hero-title">Luxury Collection</h1>
+                    <p class="shop-hero-subtitle">Discover our exclusive range of premium products crafted for the discerning shopper</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-container">
+                    <div class="filter-group">
+                        <select class="filter-select">
+                            <option>Category</option>
+                            <option>Handbags</option>
+                            <option>Watches</option>
+                            <option>Jewelry</option>
+                            <option>Accessories</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Designer</option>
+                            <option>Gucci</option>
+                            <option>Chanel</option>
+                            <option>Prada</option>
+                            <option>Hermès</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Price Range</option>
+                            <option>Under $500</option>
+                            <option>$500 - $1000</option>
+                            <option>$1000 - $2000</option>
+                            <option>Over $2000</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Sort By</option>
+                            <option>Newest First</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Most Popular</option>
+                        </select>
+                    </div>
+                    <div class="view-options">
+                        <button class="view-btn active"><i class="fas fa-th"></i></button>
+                        <button class="view-btn"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid -->
+        <section class="container">
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Handbag" class="product-img">
+                        <span class="product-badge">New</span>
+                        <div class="product-actions">
+                            <a href="#" class="action-btn"><i class="far fa-heart"></i></a>
+                            <a href="#" class="action-btn"><i class="fas fa-shopping-bag"></i></a>
+                            <a href="#" class="action-btn"><i class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-brand">Gucci</p>
+                        <h3 class="product-title">GG Marmont Matelassé Mini Bag</h3>
+                        <div class="product-price">
+                            <span class="current-price">$1,290</span>
+                            <span class="original-price">$1,580</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(42)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Watch" class="product-img">
+                        <div class="product-actions">
+                            <a href="#" class="action-btn"><i class="far fa-heart"></i></a>
+                            <a href="#" class="action-btn"><i class="fas fa-shopping-bag"></i></a>
+                            <a href="#" class="action-btn"><i class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-brand">Rolex</p>
+                        <h3 class="product-title">Datejust 36 Stainless Steel</h3>
+                        <div class="product-price">
+                            <span class="current-price">$7,650</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(28)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Jewelry" class="product-img">
+                        <span class="product-badge">Sale</span>
+                        <div class="product-actions">
+                            <a href="#" class="action-btn"><i class="far fa-heart"></i></a>
+                            <a href="#" class="action-btn"><i class="fas fa-shopping-bag"></i></a>
+                            <a href="#" class="action-btn"><i class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-brand">Tiffany & Co.</p>
+                        <h3 class="product-title">Return to Tiffany™ Heart Tag Pendant</h3>
+                        <div class="product-price">
+                            <span class="current-price">$850</span>
+                            <span class="original-price">$1,100</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(36)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Shoes" class="product-img">
+                        <div class="product-actions">
+                            <a href="#" class="action-btn"><i class="far fa-heart"></i></a>
+                            <a href="#" class="action-btn"><i class="fas fa-shopping-bag"></i></a>
+                            <a href="#" class="action-btn"><i class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-brand">Christian Louboutin</p>
+                        <h3 class="product-title">Pigalle Follies 100 Patent Pump</h3>
+                        <div class="product-price">
+                            <span class="current-price">$675</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(19)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Sunglasses" class="product-img">
+                        <span class="product-badge">Bestseller</span>
+                        <div class="product-actions">
+                            <a href="#" class="action-btn"><i class="far fa-heart"></i></a>
+                            <a href="#" class="action-btn"><i class="fas fa-shopping-bag"></i></a>
+                            <a href="#" class="action-btn"><i class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-brand">Dior</p>
+                        <h3 class="product-title">Sunglasses DIORSTELLAIRE1</h3>
+                        <div class="product-price">
+                            <span class="current-price">$420</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(57)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Scarf" class="product-img">
+                        <div class="product-actions">
+                            <a href="#" class="action-btn"><i class="far fa-heart"></i></a>
+                            <a href="#" class="action-btn"><i class="fas fa-shopping-bag"></i></a>
+                            <a href="#" class="action-btn"><i class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-brand">Hermès</p>
+                        <h3 class="product-title">Twilly Silk Muffler</h3>
+                        <div class="product-price">
+                            <span class="current-price">$160</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(23)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1542995470-870e12e7e14f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Perfume" class="product-img">
+                        <span class="product-badge">New</span>
+                        <div class="product-actions">
+                            <a href="#" class="action-btn"><i class="far fa-heart"></i></a>
+                            <a href="#" class="action-btn"><i class="fas fa-shopping-bag"></i></a>
+                            <a href="#" class="action-btn"><i class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-brand">Chanel</p>
+                        <h3 class="product-title">N°5 Eau de Parfum</h3>
+                        <div class="product-price">
+                            <span class="current-price">$132</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(41)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Wallet" class="product-img">
+                        <div class="product-actions">
+                            <a href="#" class="action-btn"><i class="far fa-heart"></i></a>
+                            <a href="#" class="action-btn"><i class="fas fa-shopping-bag"></i></a>
+                            <a href="#" class="action-btn"><i class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-brand">Prada</p>
+                        <h3 class="product-title">Saffiano Leather Wallet</h3>
+                        <div class="product-price">
+                            <span class="current-price">$550</span>
+                            <span class="original-price">$650</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(15)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">4</button>
+                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2 class="section-title">Join Our Exclusive Community</h2>
+                    <p class="newsletter-subtitle">Subscribe to receive updates on new collections, private sales, and luxury insights</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="store_policy.html">Store Policy</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Scartch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.style.display = mainNav.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // View options functionality
+        const viewBtns = document.querySelectorAll('.view-btn');
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                viewBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Product quick actions
+        const actionBtns = document.querySelectorAll('.action-btn');
+        actionBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Add to cart/wishlist functionality would go here
+            });
+        });
+    </script>
+</body>
+</html>

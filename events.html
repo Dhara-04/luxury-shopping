@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Scartch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --accent-color: #d4af37;
+            --border-color: #e5e5e5;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #f9f9f9;
+            --footer-text: #333333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .dark-mode {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --accent-color: #d4af37;
+            --border-color: #2a2a2a;
+            --card-bg: #1a1a1a;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #141414;
+            --footer-text: #f0f0f0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: calc(100vh - 400px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 300;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        /* Events Section */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .event-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-date {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .event-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .event-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .event-rsvp {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .event-rsvp:hover {
+            background: var(--accent-color);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--bg-primary);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .search-container {
+                order: 3;
+                flex: 0 0 100%;
+                margin-top: 1rem;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                    <li><a href="events.html" data-text="Events">Events</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Events Section -->
+        <section class="container">
+            <h2 class="section-title">Exclusive Events</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary);">
+                Join us for exceptional experiences and private viewings of our latest collections
+            </p>
+            
+            <div class="events-grid">
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Fall Collection Launch" class="event-img">
+                    <div class="event-content">
+                        <span class="event-date">September 15, 2023 | 7:00 PM</span>
+                        <h3 class="event-title">Fall Collection Launch</h3>
+                        <p class="event-desc">Be the first to experience our new autumn collection with an exclusive preview and champagne reception.</p>
+                        <div class="event-meta">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Flagship Store, 5th Avenue</span>
+                            </div>
+                            <button class="event-rsvp">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Designer Meet & Greet" class="event-img">
+                    <div class="event-content">
+                        <span class="event-date">September 22, 2023 | 6:30 PM</span>
+                        <h3 class="event-title">Designer Meet & Greet</h3>
+                        <p class="event-desc">An intimate evening with renowned designer Alexander Moreau, discussing inspiration and craftsmanship.</p>
+                        <div class="event-meta">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Design Studio, Soho</span>
+                            </div>
+                            <button class="event-rsvp">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <img src="https://www.jckonline.com/wp-content/uploads/2018/08/model-in-Tatiwalas-Gehna-jewelry-at-IIJS-2018.jpg" alt="Jewelry Exhibition" class="event-img">
+                    <div class="event-content">
+                        <span class="event-date">October 5, 2023 | 10:00 AM - 6:00 PM</span>
+                        <h3 class="event-title">Fine Jewelry Exhibition</h3>
+                        <p class="event-desc">A curated exhibition of rare gemstones and exceptional jewelry pieces from our master craftsmen.</p>
+                        <div class="event-meta">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Gallery 45, Madison Avenue</span>
+                            </div>
+                            <button class="event-rsvp">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Private Shopping Event" class="event-img">
+                    <div class="event-content">
+                        <span class="event-date">October 12, 2023 | 5:00 PM - 9:00 PM</span>
+                        <h3 class="event-title">VIP Private Shopping Night</h3>
+                        <p class="event-desc">An exclusive after-hours shopping experience with personal stylists and complimentary alterations.</p>
+                        <div class="event-meta">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Flagship Store, 5th Avenue</span>
+                            </div>
+                            <button class="event-rsvp">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Fashion Show" class="event-img">
+                    <div class="event-content">
+                        <span class="event-date">October 20, 2023 | 8:00 PM</span>
+                        <h3 class="event-title">Spring/Summer 2024 Fashion Show</h3>
+                        <p class="event-desc">A spectacular runway presentation of next season's collections followed by an exclusive after-party.</p>
+                        <div class="event-meta">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Grand Ballroom, Plaza Hotel</span>
+                            </div>
+                            <button class="event-rsvp">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <img src="https://www.watch-supply.co.uk/cdn/shop/files/DSC01116-2.jpg?v=1720809736&width=2048" alt="Watchmaking Workshop" class="event-img">
+                    <div class="event-content">
+                        <span class="event-date">November 3, 2023 | 2:00 PM - 5:00 PM</span>
+                        <h3 class="event-title">Art of Watchmaking Workshop</h3>
+                        <p class="event-desc">A hands-on workshop exploring the intricate craftsmanship behind luxury timepieces with master watchmakers.</p>
+                        <div class="event-meta">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Heritage Room, Timepiece Gallery</span>
+                            </div>
+                            <button class="event-rsvp">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="store_policy.html">Store Policy</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Scartch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+        
+        // Mobile menu functionality (if needed)
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

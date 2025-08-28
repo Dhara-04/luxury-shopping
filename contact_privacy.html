@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy & Contact | Scotch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8f9fa;
+            --text-color: #333333;
+            --accent-color: #d4af37;
+            --border-color: #e0e0e0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #1a1a1a;
+            --footer-text: #ffffff;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --table-header: #f5f5f5;
+        }
+
+        .dark-mode {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #d4af37;
+            --border-color: #333333;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #0a0a0a;
+            --footer-text: #e0e0e0;
+            --card-bg: #1a1a1a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --table-header: #2a2a2a;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+            color: white;
+        }
+
+        .dark-mode .page-header {
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: #ccc;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Policy Navigation */
+        .policy-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .policy-nav-btn {
+            background: none;
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .policy-nav-btn.active, .policy-nav-btn:hover {
+            background-color: var(--accent-color);
+            color: #000;
+        }
+
+        /* Policy Content */
+        .policy-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .policy-section {
+            margin-bottom: 40px;
+        }
+
+        .policy-section h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .policy-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .policy-section ul, .policy-section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .policy-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            margin: 40px auto;
+            max-width: 700px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 14px 30px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #c19b2e;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .contact-card i {
+            font-size: 32px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .contact-card p {
+            margin-bottom: 5px;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: #666;
+            padding: 10px 0;
+            display: none;
+        }
+
+        .dark-mode .faq-answer {
+            color: #ccc;
+        }
+
+        .faq-active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .search-container {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .user-actions {
+                margin-left: auto;
+            }
+            
+            .policy-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <a href="#" class="logo">SCOTCH <span>LUXURY</span></a>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                    <li><a href="designers.html">Designers</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                    <li><a href="journal.html">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>PRIVACY & CONTACT</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a>
+                <span>/</span>
+                <span>Customer Care</span>
+                <span>/</span>
+                <span>Privacy & Contact</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policy Navigation -->
+    <section class="content-section">
+        <div class="container">
+            <div class="policy-nav">
+                <button class="policy-nav-btn active" data-category="privacy">Privacy Policy</button>
+                <button class="policy-nav-btn" data-category="contact">Contact Us</button>
+                <button class="policy-nav-btn" data-category="faq">Privacy FAQ</button>
+            </div>
+            
+            <!-- Privacy Policy -->
+            <div class="policy-content" id="privacy">
+                <h2 class="section-title">Privacy Policy</h2>
+                
+                <div class="policy-section">
+                    <h3>1. Introduction</h3>
+                    <p>At Scotch Luxury, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or make a purchase from us.</p>
+                    <p>By using our website, you consent to the practices described in this policy. We may update this policy from time to time, so please review it periodically.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. Information We Collect</h3>
+                    <p>We may collect the following types of information:</p>
+                    <ul>
+                        <li><strong>Personal Information:</strong> Name, email address, phone number, shipping address, and payment information when you make a purchase or create an account.</li>
+                        <li><strong>Browsing Information:</strong> IP address, browser type, device information, and pages visited on our website.</li>
+                        <li><strong>Cookies:</strong> We use cookies to enhance your shopping experience and analyze website traffic.</li>
+                        <li><strong>Communication Data:</strong> Records of correspondence when you contact our customer service team.</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. How We Use Your Information</h3>
+                    <p>We use your information for the following purposes:</p>
+                    <ol>
+                        <li>To process and fulfill your orders</li>
+                        <li>To provide customer support and respond to inquiries</li>
+                        <li>To personalize your shopping experience</li>
+                        <li>To send marketing communications (with your consent)</li>
+                        <li>To improve our website and services</li>
+                        <li>To prevent fraud and enhance security</li>
+                        <li>To comply with legal obligations</li>
+                    </ol>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Data Security</h3>
+                    <p>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. All payment transactions are encrypted using SSL technology.</p>
+                    <p>While we strive to protect your personal information, no method of transmission over the Internet or electronic storage is 100% secure. We cannot guarantee absolute security but we work to maintain the highest standards of data protection.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Your Rights</h3>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li>Access the personal information we hold about you</li>
+                        <li>Request correction of inaccurate or incomplete information</li>
+                        <li>Request deletion of your personal data</li>
+                        <li>Object to processing of your personal data</li>
+                        <li>Request restriction of processing your personal data</li>
+                        <li>Data portability (receiving your data in a structured format)</li>
+                        <li>Withdraw consent at any time where we rely on consent to process your data</li>
+                    </ul>
+                    <p>To exercise any of these rights, please contact our Privacy Team using the contact information provided below.</p>
+                </div>
+            </div>
+            
+            <!-- Contact Form (initially hidden) -->
+            <div class="policy-content" id="contact" style="display: none;">
+                <h2 class="section-title">Contact Our Privacy Team</h2>
+                
+                <div class="contact-form">
+                    <form id="privacyContactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="privacy-inquiry">Privacy Inquiry</option>
+                                <option value="data-access">Data Access Request</option>
+                                <option value="data-deletion">Data Deletion Request</option>
+                                <option value="consent-withdrawal">Consent Withdrawal</option>
+                                <option value="security-concern">Security Concern</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Us</h3>
+                        <p>privacy@scotchluxury.com</p>
+                        <p>Response within 24-48 hours</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Call Us</h3>
+                        <p>+1 (888) 123-4567</p>
+                        <p>Mon-Fri: 9am-6pm EST</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Visit Us</h3>
+                        <p>Scotch Luxury Headquarters</p>
+                        <p>123 Luxury Avenue, New York, NY 10001</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section (initially hidden) -->
+            <div class="policy-content" id="faq" style="display: none;">
+                <h2 class="section-title">Privacy Frequently Asked Questions</h2>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How long do you keep my personal data? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We retain your personal data for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements. Typically, we keep order information for 7 years to comply with tax regulations, while account information is retained while your account remains active.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Do you share my data with third parties? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We may share your data with trusted third-party service providers who assist us in operating our website, conducting our business, or servicing you (such as payment processors and shipping carriers). These parties are required to keep your information confidential and are not permitted to use it for any other purpose. We never sell your personal data to third parties.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How can I unsubscribe from marketing emails? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You can unsubscribe from marketing communications at any time by clicking the "unsubscribe" link at the bottom of any marketing email we send you. Alternatively, you can contact our Privacy Team at privacy@scotchluxury.com to update your communication preferences.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What are cookies and how do you use them? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Cookies are small text files stored on your device when you visit our website. We use cookies to remember your preferences, analyze website traffic, and personalize content. You can control cookies through your browser settings, though please note that disabling cookies may affect your experience on our website.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do you protect children's privacy? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our website is not intended for children under the age of 16. We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a child, please contact us immediately at privacy@scotchluxury.com so we can promptly delete the information.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Scotch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Policy Navigation
+        const policyNavBtns = document.querySelectorAll('.policy-nav-btn');
+        const policyContents = document.querySelectorAll('.policy-content');
+        
+        policyNavBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                policyNavBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Hide all policy contents
+                policyContents.forEach(content => {
+                    content.style.display = 'none';
+                });
+                
+                // Show selected content
+                const contentId = btn.getAttribute('data-category');
+                document.getElementById(contentId).style.display = 'block';
+            });
+        });
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('faq-active');
+                
+                const icon = question.querySelector('i');
+                if (faqItem.classList.contains('faq-active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('privacyContactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message. Our Privacy Team will respond within 24-48 hours.');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>

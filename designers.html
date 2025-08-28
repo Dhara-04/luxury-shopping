@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scartch - Luxury Designers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary: #4f1853;
+            --primary-dark: #3a0e3d;
+            --secondary: #efa500;
+            --action: #e74c3c;
+            --light: #f9f5f0;
+            --dark: #2a2a2a;
+            --darker: #1a1a1a;
+            --body-font: 'Helvetica Neue', Arial, sans-serif;
+            --heading-font: 'Playfair Display', serif;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --glass-dark: rgba(30, 30, 30, 0.7);
+        }
+
+        /* Dark Mode Variables */
+        /* [data-theme="dark"] {
+            --primary: #b57edc;
+            --primary-dark: #9a5cc5;
+            --secondary: #ffc107;
+            --light: #2a2a2a;
+            --dark: #f9f5f0;
+            --darker: #121212;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        } */
+
+        body {
+            font-family: var(--body-font);
+            background-color: var(--light);
+            color: var(--dark);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Dark Mode Toggle Button - Bottom Right */
+        .dark-mode-toggle-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .dark-mode-toggle {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode-toggle:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .dark-mode-toggle {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--glass-dark);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] header {
+            background-color: var(--darker);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-container {
+            width: 92%;
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        /* Designers Hero Section */
+        .designers-hero {
+            height: 50vh;
+            min-height: 400px;
+            background: linear-gradient(135deg, rgba(79, 24, 83, 0.3) 0%, rgba(239, 165, 0, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .designers-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            opacity: 0.4;
+            z-index: -1;
+        }
+        
+        .designers-hero-content {
+            width: 92%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .designers-hero-title {
+            font-family: var(--heading-font);
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .designers-hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        /* Designers Grid */
+        .designers-grid {
+            width: 92%;
+            max-width: 1600px;
+            margin: 0 auto 5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .designer-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            text-align: center;
+        }
+
+        .designer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(79, 24, 83, 0.15);
+        }
+
+        .designer-image-container {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .designer-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .designer-card:hover .designer-image {
+            transform: scale(1.05);
+        }
+
+        .designer-info {
+            padding: 1.5rem;
+        }
+
+        .designer-name {
+            font-family: var(--heading-font);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .designer-category {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .designer-description {
+            color: var(--dark);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .view-collection-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .view-collection-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 3rem 0;
+        }
+
+        [data-theme="dark"] footer {
+            background-color: var(--darker);
+        }
+
+        .footer-grid {
+            width: 92%;
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            font-family: var(--heading-font);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.5rem;
+            color: var(--light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Dark Mode Specific Styles */
+        [data-theme="dark"] .designers-hero-title {
+            color: var(--secondary);
+        }
+
+        [data-theme="dark"] .designers-hero-subtitle {
+            color: var(--light);
+        }
+
+        [data-theme="dark"] .designer-card {
+            background: var(--dark);
+        }
+
+        [data-theme="dark"] .designer-name {
+            color: var(--secondary);
+        }
+
+        [data-theme="dark"] .designer-description {
+            color: var(--light);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .designers-hero-title {
+                font-size: 3rem;
+            }
+            
+            .designers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .designers-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .designers-hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .designers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .dark-mode-toggle-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .dark-mode-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .designers-hero-title {
+                font-size: 2rem;
+            }
+            
+            .designers-hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .designers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .designer-image-container {
+                height: 250px;
+            }
+            
+            .dark-mode-toggle-container {
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury designers...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers" class="active">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Designers Hero -->
+        <section class="designers-hero">
+            <div class="designers-hero-content">
+                <h1 class="designers-hero-title">Luxury Designers</h1>
+                <p class="designers-hero-subtitle">Discover the world's most prestigious fashion houses and their iconic creations.</p>
+            </div>
+        </section>
+
+        <!-- Designers Grid -->
+        <section class="designers-grid">
+            <!-- Designer 1 -->
+            <div class="designer-card">
+                <div class="designer-image-container">
+                    <img src="https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Gucci" class="designer-image">
+                </div>
+                <div class="designer-info">
+                    <h3 class="designer-name">Gucci</h3>
+                    <p class="designer-category">Italian Luxury</p>
+                    <p class="designer-description">Founded in 1921, Gucci is known for its contemporary, eclectic designs and Italian craftsmanship.</p>
+                    <button class="view-collection-btn">View Collection</button>
+                </div>
+            </div>
+            
+            <!-- Designer 2 -->
+            <div class="designer-card">
+                <div class="designer-image-container">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Chanel" class="designer-image">
+                </div>
+                <div class="designer-info">
+                    <h3 class="designer-name">Chanel</h3>
+                    <p class="designer-category">French Couture</p>
+                    <p class="designer-description">The iconic French fashion house founded by Coco Chanel, renowned for timeless elegance.</p>
+                    <button class="view-collection-btn">View Collection</button>
+                </div>
+            </div>
+            
+            <!-- Designer 3 -->
+            <div class="designer-card">
+                <div class="designer-image-container">
+                    <img src="assets/Leather-bag-Hermes-kelly-bag-Grace-Kelly.jpg" alt="Hermès" class="designer-image">
+                </div>
+                <div class="designer-info">
+                    <h3 class="designer-name">Hermès</h3>
+                    <p class="designer-category">Parisian Luxury</p>
+                    <p class="designer-description">Established in 1837, known for leather goods, lifestyle accessories, and equestrian equipment.</p>
+                    <button class="view-collection-btn">View Collection</button>
+                </div>
+            </div>
+            
+            <!-- Designer 4 -->
+            <div class="designer-card">
+                <div class="designer-image-container">
+                    <img src="assets/download.jpg" alt="Louis Vuitton" class="designer-image">
+                </div>
+                <div class="designer-info">
+                    <h3 class="designer-name">Louis Vuitton</h3>
+                    <p class="designer-category">French Fashion</p>
+                    <p class="designer-description">Founded in 1854, famous for its LV monogram and luxury trunks, leather goods, and accessories.</p>
+                    <button class="view-collection-btn">View Collection</button>
+                </div>
+            </div>
+            
+            <!-- Designer 5 -->
+            <div class="designer-card">
+                <div class="designer-image-container">
+                    <img src="assets/10prada-1.jpg" alt="Prada" class="designer-image">
+                </div>
+                <div class="designer-info">
+                    <h3 class="designer-name">Prada</h3>
+                    <p class="designer-category">Italian Fashion</p>
+                    <p class="designer-description">Founded in 1913, known for its minimalist designs and high-quality materials.</p>
+                    <button class="view-collection-btn">View Collection</button>
+                </div>
+            </div>
+            
+            <!-- Designer 6 -->
+            <div class="designer-card">
+                <div class="designer-image-container">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Dior" class="designer-image">
+                </div>
+                <div class="designer-info">
+                    <h3 class="designer-name">Dior</h3>
+                    <p class="designer-category">French Couture</p>
+                    <p class="designer-description">Founded in 1946, Christian Dior revolutionized fashion with the "New Look" silhouette.</p>
+                    <button class="view-collection-btn">View Collection</button>
+                </div>
+            </div>
+            
+            <!-- Designer 7 -->
+            <div class="designer-card">
+                <div class="designer-image-container">
+                    <img src="assets/image2_73.jpg" alt="Balenciaga" class="designer-image">
+                </div>
+                <div class="designer-info">
+                    <h3 class="designer-name">Balenciaga</h3>
+                    <p class="designer-category">Spanish Luxury</p>
+                    <p class="designer-description">Founded in 1919, known for avant-garde designs and innovative silhouettes.</p>
+                    <button class="view-collection-btn">View Collection</button>
+                </div>
+            </div>
+            
+            <!-- Designer 8 -->
+            <div class="designer-card">
+                <div class="designer-image-container">
+                    <img src="https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Valentino" class="designer-image">
+                </div>
+                <div class="designer-info">
+                    <h3 class="designer-name">Valentino</h3>
+                    <p class="designer-category">Italian Couture</p>
+                    <p class="designer-description">Founded in 1960, famous for its romantic designs and signature Valentino red.</p>
+                    <button class="view-collection-btn">View Collection</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="store_policy.html">Store Policy</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Scartch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Toggle Button (Bottom Right) -->
+    <div class="dark-mode-toggle-container">
+        <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <script>
+        // Dark Mode Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const icon = darkModeToggle.querySelector('i');
+            
+            // Check for saved theme preference or use preferred color scheme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            // Toggle dark mode
+            darkModeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                }
+            });
+            
+            // Listen for changes in system color scheme
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                const newColorScheme = e.matches ? 'dark' : 'light';
+                if (!localStorage.getItem('theme')) {
+                    document.documentElement.setAttribute('data-theme', newColorScheme);
+                    icon.classList.toggle('fa-sun', newColorScheme === 'dark');
+                    icon.classList.toggle('fa-moon', newColorScheme !== 'dark');
+                }
+            });
+            
+            // View Collection Button Functionality
+            const viewCollectionButtons = document.querySelectorAll('.view-collection-btn');
+            viewCollectionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const designerName = this.closest('.designer-card').querySelector('.designer-name').textContent;
+                    alert(`Redirecting to ${designerName}'s collection`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

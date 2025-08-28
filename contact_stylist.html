@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Our Stylists | Scotch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8f9fa;
+            --text-color: #333333;
+            --accent-color: #d4af37;
+            --border-color: #e0e0e0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #1a1a1a;
+            --footer-text: #ffffff;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --table-header: #f5f5f5;
+        }
+
+        .dark-mode {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #d4af37;
+            --border-color: #333333;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #0a0a0a;
+            --footer-text: #e0e0e0;
+            --card-bg: #1a1a1a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --table-header: #2a2a2a;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+            color: white;
+        }
+
+        .dark-mode .page-header {
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: #ccc;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Stylist Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card i {
+            font-size: 40px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        /* Stylist Team */
+        .stylist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .stylist-card {
+            background-color: var(--card-bg);
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .stylist-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .stylist-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .stylist-card:hover .stylist-image img {
+            transform: scale(1.05);
+        }
+
+        .stylist-info {
+            padding: 25px;
+        }
+
+        .stylist-info h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .stylist-info .title {
+            color: var(--accent-color);
+            font-style: italic;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stylist-info p {
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Contact Form */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 14px 30px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #c19b2e;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .info-item i {
+            font-size: 24px;
+            color: var(--accent-color);
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .info-item h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .dark-mode .info-item p {
+            color: #ccc;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .process-step .number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .process-step h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .search-container {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .user-actions {
+                margin-left: auto;
+            }
+            
+            .contact-form, .contact-info {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>CONTACT OUR STYLISTS</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Services</span>
+                <span>/</span>
+                <span>Personal Styling</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Personal Styling Services</h2>
+            <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">Our expert stylists are here to help you discover your unique style and create looks that reflect your personality. Whether you're preparing for a special event or refreshing your entire wardrobe, we offer personalized styling services tailored to your needs.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Personal Consultation</h3>
+                    <p>One-on-one virtual or in-store styling session to understand your style preferences, lifestyle needs, and wardrobe goals.</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Wardrobe Refresh</h3>
+                    <p>Transform your existing wardrobe with new combinations and identify key pieces to complete your look.</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-gem"></i>
+                    <h3>Special Occasion</h3>
+                    <p>Find the perfect outfit for weddings, galas, or important events with guidance from our expert stylists.</p>
+                </div>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="number">1</div>
+                    <h3>Schedule Consultation</h3>
+                    <p>Book a time that works for you for a virtual or in-person styling session.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="number">2</div>
+                    <h3>Style Assessment</h3>
+                    <p>Share your style preferences, lifestyle needs, and wardrobe goals.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="number">3</div>
+                    <h3>Personalized Selection</h3>
+                    <p>Our stylists curate pieces specifically chosen for your unique style.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="number">4</div>
+                    <h3>Try & Refine</h3>
+                    <p>Try the selections and provide feedback for further refinement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stylist Team Section -->
+    <section class="content-section" style="background-color: var(--secondary-bg);">
+        <div class="container">
+            <h2 class="section-title">Meet Our Stylists</h2>
+            
+            <div class="stylist-grid">
+                <div class="stylist-card">
+                    <div class="stylist-image">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Sophia Richardson">
+                    </div>
+                    <div class="stylist-info">
+                        <h3>Sophia Richardson</h3>
+                        <span class="title">Senior Fashion Stylist</span>
+                        <p>Specializing in luxury evening wear and editorial styling with over 10 years of experience.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-pinterest"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stylist-card">
+                    <div class="stylist-image">
+                        <img src="https://media.istockphoto.com/id/511194990/photo/woman-with-tape-measure-in-fashion-department.jpg?s=612x612&w=0&k=20&c=r1An0QWVg7ZIfm8YmWKHlfoc7jPA75tTQ2ALYGrImjA=" alt="James Wilson">
+                    </div>
+                    <div class="stylist-info">
+                        <h3>James Wilson</h3>
+                        <span class="title">Menswear Specialist</span>
+                        <p>Expert in tailored clothing and contemporary menswear with a focus on sustainable fashion.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-pinterest"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stylist-card">
+                    <div class="stylist-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Elena Martinez">
+                    </div>
+                    <div class="stylist-info">
+                        <h3>Elena Martinez</h3>
+                        <span class="title">Accessories Curator</span>
+                        <p>Known for her exceptional eye for details and ability to transform looks with the perfect accessories.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-pinterest"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Book a Consultation</h2>
+            
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form id="stylistContactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service</option>
+                                <option value="personal-consultation">Personal Consultation</option>
+                                <option value="wardrobe-refresh">Wardrobe Refresh</option>
+                                <option value="special-occasion">Special Occasion</option>
+                                <option value="personal-shopper">Personal Shopper</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="preferred-stylist">Preferred Stylist (Optional)</label>
+                            <select id="preferred-stylist" name="preferred-stylist">
+                                <option value="">No preference</option>
+                                <option value="sophia">Sophia Richardson</option>
+                                <option value="james">James Wilson</option>
+                                <option value="elena">Elena Martinez</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Tell us about your style needs</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Request Consultation</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+1 (888) 555-1234</p>
+                            <p>Mon-Fri: 9am-8pm EST</p>
+                            <p>Sat-Sun: 10am-6pm EST</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>stylists@scotchluxury.com</p>
+                            <p>Response within 24 hours</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>In-Store Appointments</h3>
+                            <p>Scotch Luxury Flagship Store</p>
+                            <p>123 Luxury Avenue, New York, NY 10001</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-video"></i>
+                        <div>
+                            <h3>Virtual Appointments</h3>
+                            <p>Available via Zoom, FaceTime, or Google Meet</p>
+                            <p>Worldwide service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="styling.html">Personal Styling</a></li>
+                        <li><a href="gift_cards.html">Gift Cards</a></li>
+                        <li><a href="wishlist.html">Wishlist</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                        <li><a href="policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Scotch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('stylistContactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your consultation request. Our styling team will contact you within 24 hours to schedule your appointment.');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>

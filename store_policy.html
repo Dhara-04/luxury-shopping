@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Scotch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8f9fa;
+            --text-color: #333333;
+            --accent-color: #d4af37;
+            --border-color: #e0e0e0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #1a1a1a;
+            --footer-text: #ffffff;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .dark-mode {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #d4af37;
+            --border-color: #333333;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #0a0a0a;
+            --footer-text: #e0e0e0;
+            --card-bg: #1a1a1a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+            color: white;
+        }
+
+        .dark-mode .page-header {
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: #ccc;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Policy Content */
+        .policy-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .policy-section {
+            margin-bottom: 40px;
+        }
+
+        .policy-section h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .policy-section i {
+            font-size: 20px;
+        }
+
+        .policy-section p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .policy-section ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .policy-section li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .policy-highlight {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--accent-color);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .contact-cta h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 2px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #c19b2e;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .search-container {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .user-actions {
+                margin-left: auto;
+            }
+            
+            .policy-section h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>PRIVACY POLICY</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Customer Care</span>
+                <span>/</span>
+                <span>Privacy Policy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policy Content -->
+    <section class="content-section">
+        <div class="container">
+            <div class="policy-content">
+                <div class="policy-section">
+                    <h3><i class="fas fa-shield-alt"></i> Introduction</h3>
+                    <p>At Scotch Luxury, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data when you interact with our website, make purchases, or communicate with us.</p>
+                    <p>By using our services, you consent to the practices described in this policy. We encourage you to read this document carefully to understand our approach to privacy.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h3><i class="fas fa-database"></i> Information We Collect</h3>
+                    <p>We collect information to provide better services to all our users. The types of personal information we collect include:</p>
+                    <ul>
+                        <li><strong>Personal Identification Information:</strong> Name, email address, phone number, shipping address, and payment information.</li>
+                        <li><strong>Order History:</strong> Details about products you have purchased from us.</li>
+                        <li><strong>Website Usage Data:</strong> Information about how you use our website, including IP address, browser type, and pages visited.</li>
+                        <li><strong>Communication Records:</strong> Copies of your correspondence with us if you contact our customer service team.</li>
+                        <li><strong>Preferences:</strong> Your preferences and settings to enhance your shopping experience.</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h3><i class="fas fa-cog"></i> How We Use Your Information</h3>
+                    <p>We use the information we collect for various purposes, including:</p>
+                    <ul>
+                        <li>Processing your orders and delivering products</li>
+                        <li>Providing customer support and responding to inquiries</li>
+                        <li>Personalizing your shopping experience</li>
+                        <li>Sending promotional communications (with your consent)</li>
+                        <li>Improving our website, products, and services</li>
+                        <li>Preventing fraudulent transactions and enhancing security</li>
+                        <li>Complying with legal obligations</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h3><i class="fas fa-cookie-bite"></i> Cookies and Tracking Technologies</h3>
+                    <p>Our website uses cookies and similar tracking technologies to enhance your browsing experience, analyze website traffic, and understand where our visitors come from.</p>
+                    <p>You can control cookies through your browser settings. However, disabling cookies may limit your ability to use certain features of our website.</p>
+                    <div class="policy-highlight">
+                        <p><strong>Note:</strong> We use essential cookies for website functionality, analytics cookies to improve our services, and marketing cookies to show relevant advertisements.</p>
+                    </div>
+                </div>
+
+                <div class="policy-section">
+                    <h3><i class="fas fa-share-alt"></i> Data Sharing and Disclosure</h3>
+                    <p>We value your privacy and do not sell your personal information to third parties. We may share your information with:</p>
+                    <ul>
+                        <li><strong>Service Providers:</strong> Trusted partners who assist us in operating our website, processing payments, and delivering products.</li>
+                        <li><strong>Legal Authorities:</strong> When required by law or to protect our rights, property, or safety.</li>
+                        <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of all or a portion of our assets.</li>
+                    </ul>
+                    <p>All third-party service providers are required to maintain the confidentiality and security of your information.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h3><i class="fas fa-lock"></i> Data Security</h3>
+                    <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+                    <p>All transactions are processed through a secure gateway and no credit card information is stored on our servers. We use SSL encryption to protect data transmission.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h3><i class="fas fa-user-check"></i> Your Rights</h3>
+                    <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+                    <ul>
+                        <li>Access and receive a copy of your personal data</li>
+                        <li>Correct inaccurate or incomplete information</li>
+                        <li>Request deletion of your personal data</li>
+                        <li>Object to or restrict processing of your data</li>
+                        <li>Data portability (receiving your data in a structured format)</li>
+                        <li>Withdraw consent at any time</li>
+                    </ul>
+                    <p>To exercise any of these rights, please contact us using the information provided below.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h3><i class="fas fa-calendar-alt"></i> Policy Updates</h3>
+                    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons.</p>
+                    <p>We will notify you of any material changes by posting the updated policy on our website with a new effective date. We encourage you to review this policy periodically.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our handling of your personal information, please contact our Data Protection Officer:</p>
+                    <p>Email: privacy@scotchluxury.com<br>
+                    Phone: +1 (888) 123-4567<br>
+                    Address: 123 Luxury Avenue, Fashion District, New York, NY 10001</p>
+                </div>
+
+                <div class="policy-highlight">
+                    <p><strong>Effective Date:</strong> This Privacy Policy was last updated on August 20, 2023.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Have questions about your privacy?</h2>
+            <p>Our privacy team is here to address any concerns you may have</p>
+            <a href="team.html" class="btn">Contact Privacy Team</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Scotch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

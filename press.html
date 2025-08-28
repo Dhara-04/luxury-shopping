@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press | Scotch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            /* Light theme variables - luxury aesthetic */
+            --bg-primary: #fcf8f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #2a2a2a;
+            --text-secondary: #5c5c5c;
+            --accent-gold: #c6a972;
+            --accent-dark: #1a1a1a;
+            --card-bg: #ffffff;
+            --border-color: #e8e8e8;
+            --header-bg: rgba(252, 248, 245, 0.95);
+            --footer-bg: #f8f5f2;
+            --box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+            --gradient-bg: linear-gradient(135deg, #fcf8f5 0%, #f9f4f0 100%);
+            --filter-bg: #f7f3f0;
+        }
+
+        .dark-mode {
+            /* Dark theme variables - luxury aesthetic */
+            --bg-primary: #121212;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #cccccc;
+            --accent-gold: #d6b878;
+            --accent-dark: #f5f5f5;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #151515;
+            --box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+            --gradient-bg: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+            --filter-bg: #2a2a2a;
+        }
+
+        /* Theme toggle - positioned at bottom right */
+        .theme-toggle-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.5s ease, opacity 0.3s ease;
+        }
+
+        .theme-toggle .fa-sun {
+            position: absolute;
+            opacity: 0;
+            transform: translateY(20px) rotate(90deg);
+        }
+
+        .dark-mode .theme-toggle .fa-moon {
+            opacity: 0;
+            transform: translateY(-20px) rotate(-90deg);
+        }
+
+        .dark-mode .theme-toggle .fa-sun {
+            opacity: 1;
+            transform: translateY(0) rotate(0);
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 120px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill-opacity="0.03" fill="%23c6a972" x="0" y="0" width="100" height="100"/></svg>');
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--bg-secondary);
+            padding: 16px 40px;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-gold);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-gold);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent-gold);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-secondary);
+        }
+
+        /* Press filters */
+        .filters-section {
+            background-color: var(--filter-bg);
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .filters-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            min-width: 180px;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+
+        /* Press features */
+        .featured-press {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 0 0 60px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent-gold);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 35px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 0;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .feature-image {
+            height: 220px;
+            background-color: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature-content {
+            padding: 30px;
+        }
+
+        .press-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: var(--accent-gold);
+            color: var(--bg-secondary);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .press-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .press-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .press-description {
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 0;
+            background-color: transparent;
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .read-more:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 1px;
+            bottom: 10px;
+            left: 0;
+            background-color: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .read-more:hover:after {
+            width: 100%;
+        }
+
+        .read-more i {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Press mentions */
+        .press-mentions {
+            background-color: var(--bg-secondary);
+            padding: 100px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mentions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .mention-card {
+            text-align: center;
+            padding: 40px 30px;
+            background-color: var(--card-bg);
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .mention-logo {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .mention-card:hover .mention-logo {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .mention-card h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .mention-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Media kit section */
+        .media-kit {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .media-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .media-content p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        .kit-downloads {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .download-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            width: 250px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .download-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        .download-card h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-secondary);
+        }
+
+                
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        body.dark-mode footer {
+            background: var(--darkest);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            font-family: var(--heading-font);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            font-family: var(--body-font);
+            transition: var(--transition);
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .payment-methods {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .payment-methods i {
+            font-size: 1.8rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .payment-methods i:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-family: var(--body-font);
+            color: #aaa;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        /* Press contact */
+        .press-contact {
+            background-color: var(--filter-bg);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+            
+            .header-actions {
+                margin-top: 15px;
+            }
+            
+            .hero {
+                padding: 80px 0 70px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .filters-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .filter-select {
+                width: 100%;
+            }
+            
+            .feature-grid, .mentions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+                max-width: 300px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .theme-toggle-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .theme-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+            
+            .kit-downloads {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-details {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .feature-content {
+                padding: 20px;
+            }
+            
+            .press-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .theme-toggle-container {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="serif-font">Scotch in the Press</h1>
+            <p>Discover the latest features, interviews, and articles about Scotch Luxury from leading publications around the world.</p>
+            <a href="#featured-press" class="btn">Explore Features</a>
+            <a href="#media-kit" class="btn btn-outline">Media Kit</a>
+        </div>
+    </section>
+
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label>Filter by Category</label>
+                    <select class="filter-select">
+                        <option>All Categories</option>
+                        <option>Features</option>
+                        <option>Interviews</option>
+                        <option>Product Launches</option>
+                        <option>Brand News</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Filter by Publication</label>
+                    <select class="filter-select">
+                        <option>All Publications</option>
+                        <option>Vogue</option>
+                        <option>Elle</option>
+                        <option>Harper's Bazaar</option>
+                        <option>GQ</option>
+                        <option>Forbes</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Filter by Year</label>
+                    <select class="filter-select">
+                        <option>All Years</option>
+                        <option>2023</option>
+                        <option>2022</option>
+                        <option>2021</option>
+                        <option>2020</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sort By</label>
+                    <select class="filter-select">
+                        <option>Most Recent</option>
+                        <option>Most Popular</option>
+                        <option>A-Z</option>
+                        <option>Z-A</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-press" id="featured-press">
+        <div class="container">
+            <h2 class="section-title serif-font">Featured Press</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect fill='%23f7f3f0' width='400' height='220'/><text fill='%23c6a972' font-family='Montserrat' font-size='20' font-weight='bold' x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>Vogue Feature</text></svg>" alt="Vogue Feature">
+                    </div>
+                    <div class="feature-content">
+                        <span class="press-category">COVER STORY</span>
+                        <h3 class="serif-font">Scotch Luxury: Redefining Modern Elegance</h3>
+                        <div class="press-meta">
+                            <span><i class="fas fa-newspaper"></i> Vogue</span>
+                            <span><i class="fas fa-calendar-alt"></i> June 15, 2023</span>
+                        </div>
+                        <p class="press-description">An in-depth look at how Scotch Luxury is transforming the fashion landscape with its commitment to craftsmanship and sustainable luxury.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect fill='%23f7f3f0' width='400' height='220'/><text fill='%23c6a972' font-family='Montserrat' font-size='20' font-weight='bold' x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>Elle Interview</text></svg>" alt="Elle Interview">
+                    </div>
+                    <div class="feature-content">
+                        <span class="press-category">INTERVIEW</span>
+                        <h3 class="serif-font">Exclusive: Creative Director on Future Collections</h3>
+                        <div class="press-meta">
+                            <span><i class="fas fa-newspaper"></i> Elle</span>
+                            <span><i class="fas fa-calendar-alt"></i> May 2, 2023</span>
+                        </div>
+                        <p class="press-description">Our Creative Director shares insights into the inspiration behind the upcoming season and the future direction of Scotch Luxury.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect fill='%23f7f3f0' width='400' height='220'/><text fill='%23c6a972' font-family='Montserrat' font-size='20' font-weight='bold' x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>Bazaar Launch</text></svg>" alt="Bazaar Launch">
+                    </div>
+                    <div class="feature-content">
+                        <span class="press-category">PRODUCT LAUNCH</span>
+                        <h3 class="serif-font">Scotch Unveils Revolutionary Sustainable Collection</h3>
+                        <div class="press-meta">
+                            <span><i class="fas fa-newspaper"></i> Harper's Bazaar</span>
+                            <span><i class="fas fa-calendar-alt"></i> April 18, 2023</span>
+                        </div>
+                        <p class="press-description">Harper's Bazaar covers our latest sustainable collection that combines eco-friendly materials with uncompromised luxury.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect fill='%23f7f3f0' width='400' height='220'/><text fill='%23c6a972' font-family='Montserrat' font-size='20' font-weight='bold' x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>Forbes Feature</text></svg>" alt="Forbes Feature">
+                    </div>
+                    <div class="feature-content">
+                        <span class="press-category">BUSINESS</span>
+                        <h3 class="serif-font">The Business of Luxury: Scotch's Growth Strategy</h3>
+                        <div class="press-meta">
+                            <span><i class="fas fa-newspaper"></i> Forbes</span>
+                            <span><i class="fas fa-calendar-alt"></i> March 5, 2023</span>
+                        </div>
+                        <p class="press-description">Forbes examines Scotch Luxury's innovative business model and its successful expansion into new international markets.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect fill='%23f7f3f0' width='400' height='220'/><text fill='%23c6a972' font-family='Montserrat' font-size='20' font-weight='bold' x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>GQ Style</text></svg>" alt="GQ Style">
+                    </div>
+                    <div class="feature-content">
+                        <span class="press-category">MEN'S STYLE</span>
+                        <h3 class="serif-font">Redefining Menswear: The Scotch Approach</h3>
+                        <div class="press-meta">
+                            <span><i class="fas fa-newspaper"></i> GQ</span>
+                            <span><i class="fas fa-calendar-alt"></i> February 12, 2023</span>
+                        </div>
+                        <p class="press-description">GQ explores how Scotch Luxury is changing the landscape of high-end menswear with its innovative designs and attention to detail.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect fill='%23f7f3f0' width='400' height='220'/><text fill='%23c6a972' font-family='Montserrat' font-size='20' font-weight='bold' x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>Design Week</text></svg>" alt="Design Week">
+                    </div>
+                    <div class="feature-content">
+                        <span class="press-category">DESIGN</span>
+                        <h3 class="serif-font">Inside Scotch's Award-Winning Store Designs</h3>
+                        <div class="press-meta">
+                            <span><i class="fas fa-newspaper"></i> Design Week</span>
+                            <span><i class="fas fa-calendar-alt"></i> January 28, 2023</span>
+                        </div>
+                        <p class="press-description">A look at the architectural philosophy behind Scotch's flagship stores that have received international design accolades.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="press-mentions">
+        <div class="container">
+            <h2 class="section-title serif-font">Featured In</h2>
+            <div class="mentions-grid">
+                <div class="mention-card">
+                    <div class="mention-logo">
+                        <i class="fas fa-quote-left fa-3x"></i>
+                    </div>
+                    <h3 class="serif-font">Vogue</h3>
+                    <p>"Scotch Luxury represents the pinnacle of craftsmanship and design innovation in today's fashion landscape."</p>
+                    <a href="#" class="read-more">View Features <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="mention-card">
+                    <div class="mention-logo">
+                        <i class="fas fa-quote-left fa-3x"></i>
+                    </div>
+                    <h3 class="serif-font">Harper's Bazaar</h3>
+                    <p>"A masterclass in blending traditional techniques with contemporary aesthetics. Scotch is defining modern luxury."</p>
+                    <a href="#" class="read-more">View Features <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="mention-card">
+                    <div class="mention-logo">
+                        <i class="fas fa-quote-left fa-3x"></i>
+                    </div>
+                    <h3 class="serif-font">Elle</h3>
+                    <p>"From runway to retail, Scotch continues to impress with its unwavering commitment to quality and sustainability."</p>
+                    <a href="#" class="read-more">View Features <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="media-kit" id="media-kit">
+        <div class="container">
+            <h2 class="section-title serif-font">Media Kit</h2>
+            <div class="media-content">
+                <p>Access our press resources including high-resolution images, brand assets, company information, and executive biographies for your publications.</p>
+            </div>
+            <div class="kit-downloads">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="serif-font">Brand Images</h3>
+                    <p>High-resolution product and campaign photography</p>
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="serif-font">Press Releases</h3>
+                    <p>Latest announcements and company news</p>
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="serif-font">Brand Guide</h3>
+                    <p>Logo usage, branding guidelines, and style guide</p>
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="press-contact">
+        <div class="container">
+            <h2 class="section-title serif-font">Press Contact</h2>
+            <div class="contact-info">
+                <p>For press inquiries, interview requests, or additional information, please contact our press team.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>press@scotch-luxury.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Phone</h3>
+                        <p>+1 (212) 555-7890</p>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Press Officer</h3>
+                        <p>Isabella Laurent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="store_policy.html">Store Policy</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Scartch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>   
+
+    <!-- Theme toggle positioned at bottom right -->
+    <div class="theme-toggle-container">
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcons = themeToggle.querySelectorAll('i');
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            document.body.classList.add('dark-mode');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Filter functionality
+        const filterSelects = document.querySelectorAll('.filter-select');
+        
+        filterSelects.forEach(select => {
+            select.addEventListener('change', () => {
+                // In a real implementation, this would filter the press features
+                console.log(`Filtering by: ${select.value}`);
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

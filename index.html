@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scartch - Luxury Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Elevate Your Style</h1>
+                <p class="hero-subtitle">Discover the finest luxury collections curated for the discerning shopper</p>
+                <a href="shop_now.html" class="hero-btn">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- Featured Collections -->
+        <section id="collections" class="container">
+            <h2 class="section-title">Featured Collections</h2>
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <img src="./assets/photo-1551232864-3f0890e580d9.jpg" alt="Luxury Handbags" class="collection-img">
+                    <div class="collection-info">
+                        <h3 class="collection-title">Spring Handbags</h3>
+                        <p class="collection-desc">The season's most coveted designs</p>
+                    </div>
+                </div>
+                <div class="collection-card">
+                    <img src="./assets/photo-1542272604-787c3835535d.jpg" alt="Luxury Watches" class="collection-img">
+                    <div class="collection-info">
+                        <h3 class="collection-title">Timepiece Collection</h3>
+                        <p class="collection-desc">Masterpieces of precision engineering</p>
+                    </div>
+                </div>
+                <div class="collection-card">
+                    <img src="./assets/photo-1539109136881-3be0616acf4b.jpg" alt="Luxury Jewelry" class="collection-img">
+                    <div class="collection-info">
+                        <h3 class="collection-title">Fine Jewelry</h3>
+                        <p class="collection-desc">Exquisite craftsmanship in every piece</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Designers -->
+        <section id="designers" class="container designers-section">
+            <h2 class="section-title">Featured Designers</h2>
+            <div class="designers-grid">
+                <div class="designer-card">
+                    <img src="./assets/photo-1554412933-514a83d2f3c8.jpg" alt="Gucci" class="designer-logo">
+                    <h3 class="designer-name">Gucci</h3>
+                    <p class="designer-desc">Italian luxury brand of fashion and leather goods</p>
+                </div>
+                <div class="designer-card">
+                    <img src="./assets/photo-1551232864-3f0890e580d9.jpg" alt="Chanel" class="designer-logo">
+                    <h3 class="designer-name">Chanel</h3>
+                    <p class="designer-desc">French luxury fashion house specializing in haute couture</p>
+                </div>
+                <div class="designer-card">
+                    <img src="./assets/photo-1542272604-787c3835535d.jpg" alt="Prada" class="designer-logo">
+                    <h3 class="designer-name">Prada</h3>
+                    <p class="designer-desc">Milan-based luxury fashion house</p>
+                </div>
+                <div class="designer-card">
+                    <img src="./assets/hermes-logo.jpg" alt="Hermès" class="designer-logo">
+                    <h3 class="designer-name">Hermès</h3>
+                    <p class="designer-desc">French high fashion luxury goods manufacturer</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sale Section -->
+        <section id="sale" class="container">
+            <div class="sale-banner">
+                <div class="sale-content">
+                    <h2 class="sale-title">Summer Sale</h2>
+                    <p class="sale-subtitle">Up to 50% off select luxury items</p>
+                    <div class="sale-timer">
+                        <div class="timer-block">
+                            <div class="timer-number" id="days">03</div>
+                            <div class="timer-label">Days</div>
+                        </div>
+                        <div class="timer-block">
+                            <div class="timer-number" id="hours">12</div>
+                            <div class="timer-label">Hours</div>
+                        </div>
+                        <div class="timer-block">
+                            <div class="timer-number" id="minutes">45</div>
+                            <div class="timer-label">Minutes</div>
+                        </div>
+                        <div class="timer-block">
+                            <div class="timer-number" id="seconds">30</div>
+                            <div class="timer-label">Seconds</div>
+                        </div>
+                    </div>
+                    <a href="#" class="hero-btn">Shop the Sale</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journal Section -->
+        <section id="journal" class="container">
+            <h2 class="section-title">From Our Journal</h2>
+            <div class="journal-grid">
+                <div class="journal-card">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Fashion Trends" class="journal-img">
+                    <div class="journal-content">
+                        <p class="journal-date">June 15, 2023</p>
+                        <h3 class="journal-title">Summer 2023 Fashion Trends</h3>
+                        <p class="journal-excerpt">Discover the must-have styles and colors for this season's hottest looks.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="journal-card">
+                    <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Luxury Watches" class="journal-img">
+                    <div class="journal-content">
+                        <p class="journal-date">May 28, 2023</p>
+                        <h3 class="journal-title">The Art of Watchmaking</h3>
+                        <p class="journal-excerpt">Explore the intricate craftsmanship behind the world's finest timepieces.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="journal-card">
+                    <img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Sustainable Luxury" class="journal-img">
+                    <div class="journal-content">
+                        <p class="journal-date">April 10, 2023</p>
+                        <h3 class="journal-title">Sustainable Luxury: The Future</h3>
+                        <p class="journal-excerpt">How leading brands are embracing sustainability without compromising on luxury.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2 class="section-title">Join Our Exclusive Community</h2>
+                    <p class="newsletter-subtitle">Subscribe to receive updates on new collections, private sales, and luxury insights</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="store_policy.html">Store Policy</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Scartch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="javascript/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Scotch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8f9fa;
+            --text-color: #333333;
+            --accent-color: #d4af37;
+            --border-color: #e0e0e0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #1a1a1a;
+            --footer-text: #ffffff;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --search-bg: #f1f1f1;
+        }
+
+        .dark-mode {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #d4af37;
+            --border-color: #333333;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #0a0a0a;
+            --footer-text: #e0e0e0;
+            --card-bg: #1a1a1a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --search-bg: #2a2a2a;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* FAQ Content */
+        .faq-content {
+            padding: 40px 0;
+        }
+
+        .faq-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .faq-intro p {
+            font-size: 16px;
+            color: #666;
+            margin-top: 15px;
+        }
+
+        .dark-mode .faq-intro p {
+            color: #ccc;
+        }
+
+        .search-faq {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .search-faq-container {
+            display: flex;
+            background: var(--search-bg);
+            border-radius: 30px;
+            padding: 5px 5px 5px 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .search-faq-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 12px;
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .search-faq-btn {
+            background: var(--accent-color);
+            color: #000;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .category-btn {
+            background: var(--secondary-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-section {
+            margin-bottom: 50px;
+        }
+
+        .faq-section-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .faq-section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -1px;
+            left: 0;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 500;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: var(--secondary-bg);
+        }
+
+        .faq-active .faq-answer {
+            padding: 20px;
+            max-height: 300px;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .contact-support {
+            text-align: center;
+            padding: 60px 0;
+            background: var(--secondary-bg);
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+
+        .contact-support h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .contact-support p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #666;
+        }
+
+        .dark-mode .contact-support p {
+            color: #ccc;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 2px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #c19b2e;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .search-container {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .faq-section-title {
+                font-size: 20px;
+            }
+            
+            .user-actions {
+                margin-left: auto;
+            }
+            
+            .faq-question {
+                font-size: 16px;
+                padding: 15px;
+            }
+            
+            .faq-active .faq-answer {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>FREQUENTLY ASKED QUESTIONS</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Customer Care</span>
+                <span>/</span>
+                <span>FAQ</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq-content">
+        <div class="container">
+            <div class="faq-intro">
+                <h2>How Can We Help You?</h2>
+                <p>Find answers to the most commonly asked questions about our products, services, and policies.</p>
+            </div>
+            
+            <div class="search-faq">
+                <div class="search-faq-container">
+                    <input type="text" class="search-faq-input" placeholder="Search for questions...">
+                    <button class="search-faq-btn">Search</button>
+                </div>
+            </div>
+            
+            <div class="faq-categories">
+                <button class="category-btn active">All Questions</button>
+                <button class="category-btn">Orders & Shipping</button>
+                <button class="category-btn">Returns & Exchanges</button>
+                <button class="category-btn">Products & Care</button>
+                <button class="category-btn">Payment & Security</button>
+                <button class="category-btn">Account & Services</button>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-section">
+                    <h3 class="faq-section-title">Orders & Shipping</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How long does shipping take? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer several shipping options:
+                                <br><br>
+                                - Standard Shipping: 3-5 business days (complimentary on orders over $500)
+                                <br>
+                                - Express Shipping: 2-3 business days ($25 flat rate)
+                                <br>
+                                - International Shipping: 5-10 business days (rates vary by destination)
+                                <br><br>
+                                Please note that order processing takes 1-2 business days before shipment.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How can I track my order? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Once your order has been shipped, you will receive a confirmation email with a tracking number and a link to track your package. You can also track your order by logging into your account and visiting the Order History section.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Do you ship internationally? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we ship to over 50 countries worldwide. International orders are shipped via DHL International and typically take 5-10 business days to arrive. Please note that customs duties and import taxes may apply depending on your country's regulations, and these charges are the responsibility of the recipient.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-section">
+                    <h3 class="faq-section-title">Returns & Exchanges</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What is your return policy? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer a 30-day return policy for most unused items in their original condition with tags attached. Items must be in their original packaging with proof of purchase. For hygiene reasons, certain items like earrings for pierced ears, swimwear, and intimate apparel cannot be returned. Final sale items are also non-returnable.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I initiate a return? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To initiate a return:
+                                <br><br>
+                                1. Log into your account and go to Order History
+                                <br>
+                                2. Select the item you wish to return
+                                <br>
+                                3. Follow the prompts to generate a return label
+                                <br>
+                                4. Package the item securely with all original tags and packaging
+                                <br>
+                                5. Drop off at any authorized shipping location
+                                <br><br>
+                                Alternatively, you can contact our customer care team for assistance.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How long does it take to process a refund? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Once we receive your return, it takes 3-5 business days to process. After processing, your bank may take an additional 5-10 business days to post the refund to your account, depending on their policies.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-section">
+                    <h3 class="faq-section-title">Products & Care</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I care for my luxury leather goods? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To maintain the beauty of your leather goods:
+                                <br><br>
+                                - Store in a cool, dry place away from direct sunlight
+                                <br>
+                                - Use a soft, dry cloth for regular cleaning
+                                <br>
+                                - Avoid contact with water, perfumes, and cosmetics
+                                <br>
+                                - Use specialized leather conditioner periodically
+                                <br>
+                                - Stuff bags with tissue paper to maintain shape when not in use
+                                <br><br>
+                                Always refer to the care instructions provided with your specific product.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Are your products authentic? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely. Scotch Luxury is an authorized retailer of all the brands we carry. We source our products directly from designers and official distributors. Each item comes with its original packaging, authenticity cards, and certificates where applicable. We guarantee the authenticity of every product we sell.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Do you offer repairs or maintenance services? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer repair and maintenance services for items purchased from us. Services include hardware replacement, stitching repairs, leather conditioning, and more. Please contact our customer care team with details about your product and the required service. Note that some services may incur charges depending on the product age and warranty status.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-support">
+                <h2>Still Have Questions?</h2>
+                <p>Our customer care team is available to assist you with any additional questions or concerns you may have.</p>
+                <a href="customer_care.html" class="btn">Contact Customer Care</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Scotch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('faq-active');
+                
+                const icon = question.querySelector('i');
+                if (faqItem.classList.contains('faq-active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        // FAQ Search Functionality
+        const searchFaqInput = document.querySelector('.search-faq-input');
+        const searchFaqBtn = document.querySelector('.search-faq-btn');
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        searchFaqBtn.addEventListener('click', searchFAQ);
+        searchFaqInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                searchFAQ();
+            }
+        });
+        
+        function searchFAQ() {
+            const searchTerm = searchFaqInput.value.toLowerCase();
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    // Open the matching FAQ item
+                    item.classList.add('faq-active');
+                    item.querySelector('.faq-question i').classList.remove('fa-chevron-down');
+                    item.querySelector('.faq-question i').classList.add('fa-chevron-up');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Category Filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // In a real implementation, you would filter FAQs by category
+                // This is a simplified version that just shows all FAQs
+                faqItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

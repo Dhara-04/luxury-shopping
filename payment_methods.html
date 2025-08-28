@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Methods | Scotch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8f9fa;
+            --text-color: #333333;
+            --accent-color: #d4af37;
+            --border-color: #e0e0e0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #1a1a1a;
+            --footer-text: #ffffff;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --table-header: #f5f5f5;
+        }
+
+        .dark-mode {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #d4af37;
+            --border-color: #333333;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #0a0a0a;
+            --footer-text: #e0e0e0;
+            --card-bg: #1a1a1a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --table-header: #2a2a2a;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1607083206968-13611e3d76db?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+            color: white;
+        }
+
+        .dark-mode .page-header {
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1607083206968-13611e3d76db?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center/cover;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: #ccc;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Payment Methods Grid */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .payment-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .payment-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .payment-card i {
+            font-size: 32px;
+        }
+
+        .payment-card p {
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .payment-features {
+            list-style: none;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .payment-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-features i {
+            color: var(--accent-color);
+            font-size: 16px;
+        }
+
+        /* Security Section */
+        .security-section {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .security-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge i {
+            font-size: 40px;
+            color: var(--accent-color);
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: #666;
+            padding: 10px 0;
+            display: none;
+        }
+
+        .dark-mode .faq-answer {
+            color: #ccc;
+        }
+
+        .faq-active .faq-answer {
+            display: block;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .contact-cta h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 2px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #c19b2e;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .search-container {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .user-actions {
+                margin-left: auto;
+            }
+            
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>PAYMENT METHODS</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a>
+                <span>/</span>
+                <span>Customer Care</span>
+                <span>/</span>
+                <span>Payment Methods</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Secure Payment Options</h2>
+            
+            <div class="payment-grid">
+                <div class="payment-card">
+                    <h3><i class="fab fa-cc-visa"></i> Credit & Debit Cards</h3>
+                    <p>We accept all major credit and debit cards for your convenience.</p>
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check"></i> Visa, Mastercard, American Express</li>
+                        <li><i class="fas fa-check"></i> Secure encryption technology</li>
+                        <li><i class="fas fa-check"></i> Instant payment processing</li>
+                        <li><i class="fas fa-check"></i> 3D Secure authentication</li>
+                    </ul>
+                </div>
+                
+                <div class="payment-card">
+                    <h3><i class="fab fa-paypal"></i> PayPal</h3>
+                    <p>Shop quickly and securely with your PayPal account.</p>
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check"></i> Fast checkout process</li>
+                        <li><i class="fas fa-check"></i> Buyer protection included</li>
+                        <li><i class="fas fa-check"></i> No need to share card details</li>
+                        <li><i class="fas fa-check"></i> Instant payment confirmation</li>
+                    </ul>
+                </div>
+                
+                <div class="payment-card">
+                    <h3><i class="fas fa-mobile-alt"></i> Apple Pay & Google Pay</h3>
+                    <p>Use your mobile device for quick and contactless payments.</p>
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check"></i> Faster checkout experience</li>
+                        <li><i class="fas fa-check"></i> Enhanced security features</li>
+                        <li><i class="fas fa-check"></i> Fingerprint/Face ID authentication</li>
+                        <li><i class="fas fa-check"></i> No card details stored on device</li>
+                    </ul>
+                </div>
+                
+                <div class="payment-card">
+                    <h3><i class="fas fa-university"></i> Bank Transfer</h3>
+                    <p>Direct bank transfer options for those who prefer traditional methods.</p>
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check"></i> Direct from your bank account</li>
+                        <li><i class="fas fa-check"></i> No transaction fees</li>
+                        <li><i class="fas fa-check"></i> Processing within 1-2 business days</li>
+                        <li><i class="fas fa-check"></i> Secure banking protocols</li>
+                    </ul>
+                </div>
+                
+                <div class="payment-card">
+                    <h3><i class="fas fa-money-check"></i> Installment Plans</h3>
+                    <p>Flexible payment options for larger purchases.</p>
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check"></i> Pay in 3, 6, or 12 monthly installments</li>
+                        <li><i class="fas fa-check"></i> 0% interest options available</li>
+                        <li><i class="fas fa-check"></i> Quick approval process</li>
+                        <li><i class="fas fa-check"></i> No hidden fees</li>
+                    </ul>
+                </div>
+                
+                <div class="payment-card">
+                    <h3><i class="fas fa-gift"></i> Gift Cards & Store Credit</h3>
+                    <p>Use Scotch Luxury gift cards or store credit for your purchase.</p>
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check"></i> Apply gift card at checkout</li>
+                        <li><i class="fas fa-check"></i> Use partial amounts</li>
+                        <li><i class="fas fa-check"></i> Combine with other payment methods</li>
+                        <li><i class="fas fa-check"></i> No expiration date</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="security-section">
+                <h3><i class="fas fa-shield-alt"></i> Secure Payment Guarantee</h3>
+                <p>At Scotch Luxury, we prioritize the security of your financial information. All transactions are encrypted using industry-standard SSL technology and processed through PCI-DSS compliant payment gateways.</p>
+                
+                <div class="security-badges">
+                    <div class="badge">
+                        <i class="fas fa-lock"></i>
+                        <span>256-bit Encryption</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-shield-check"></i>
+                        <span>PCI DSS Compliant</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fa-solid fa-shield"></i>
+                        <span>Fraud Protection</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-check-double"></i>
+                        <span>3D Secure</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is it safe to use my credit card on your website? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, absolutely. We use industry-standard SSL encryption to protect your data, and we are PCI DSS compliant. We never store your complete credit card details on our servers.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What currencies do you accept? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We accept payments in USD, EUR, GBP, CAD, AUD, and JPY. The currency will be automatically selected based on your location, but you can change it at checkout.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are there any additional fees for using certain payment methods? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        No, we do not charge any additional fees for any payment method. The price you see at checkout is the final amount you will pay.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I save my payment details for future purchases? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, you can securely save your payment details in your account for faster checkout. All saved information is encrypted and stored following strict security protocols.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What should I do if my payment is declined? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                    Payment declines can happen for various reasons. Please check that your card details are entered correctly, ensure you have sufficient funds, and verify that your card allows international transactions if applicable. If problems persist, please contact your bank or our customer service team.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Need assistance with payment?</h2>
+            <p>Our customer care team is available to help with any payment-related questions</p>
+            <a href="contact_support.html" class="btn">Contact Support</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Scotch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('faq-active');
+                
+                const icon = question.querySelector('i');
+                if (faqItem.classList.contains('faq-active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

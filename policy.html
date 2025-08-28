@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Scotch Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            /* Light theme variables - luxury aesthetic */
+            --bg-primary: #fcf8f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #2a2a2a;
+            --text-secondary: #5c5c5c;
+            --accent-gold: #c6a972;
+            --accent-dark: #1a1a1a;
+            --card-bg: #ffffff;
+            --border-color: #e8e8e8;
+            --header-bg: rgba(252, 248, 245, 0.95);
+            --footer-bg: #f8f5f2;
+            --box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+            --gradient-bg: linear-gradient(135deg, #fcf8f5 0%, #f9f4f0 100%);
+            --filter-bg: #f7f3f0;
+        }
+
+        .dark-mode {
+            /* Dark theme variables - luxury aesthetic */
+            --bg-primary: #121212;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #cccccc;
+            --accent-gold: #d6b878;
+            --accent-dark: #f5f5f5;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --footer-bg: #151515;
+            --box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+            --gradient-bg: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+            --filter-bg: #2a2a2a;
+        }
+        /* Theme toggle - positioned at bottom right */
+        .theme-toggle-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.5s ease, opacity 0.3s ease;
+        }
+
+        .theme-toggle .fa-sun {
+            position: absolute;
+            opacity: 0;
+            transform: translateY(20px) rotate(90deg);
+        }
+
+        .dark-mode .theme-toggle .fa-moon {
+            opacity: 0;
+            transform: translateY(-20px) rotate(-90deg);
+        }
+
+        .dark-mode .theme-toggle .fa-sun {
+            opacity: 1;
+            transform: translateY(0) rotate(0);
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill-opacity="0.03" fill="%23c6a972" x="0" y="0" width="100" height="100"/></svg>');
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb li {
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb li:not(:last-child):after {
+            content: '/';
+            margin-left: 10px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Privacy content */
+        .privacy-content {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            margin: 0 0 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent-gold);
+        }
+
+        .privacy-section {
+            margin-bottom: 60px;
+        }
+
+        .privacy-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .privacy-section p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .privacy-section ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .privacy-section ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent-gold);
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            padding: 70px 0 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+            font-size: 1.4rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 70px;
+            color: var(--text-secondary);
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+            
+            .header-actions {
+                margin-top: 15px;
+            }
+            
+            .hero {
+                padding: 80px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .privacy-content {
+                padding: 60px 0;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .theme-toggle-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .theme-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .privacy-section h3 {
+                font-size: 1.5rem;
+            }
+            
+            .theme-toggle-container {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="serif-font">Privacy Policy</h1>
+            <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li>Privacy Policy</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="privacy-content">
+        <div class="container">
+            <div class="privacy-section">
+                <h2 class="section-title serif-font">Our Commitment to Privacy</h2>
+                <p>At Scotch Luxury, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data when you interact with our website, products, and services.</p>
+                
+                <div class="highlight-box">
+                    <p>Last Updated: August 20, 2023</p>
+                </div>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">Information We Collect</h3>
+                <p>We may collect the following types of information:</p>
+                <ul>
+                    <li><strong>Personal Information:</strong> Name, email address, phone number, shipping address, and payment information when you make a purchase or create an account.</li>
+                    <li><strong>Browsing Information:</strong> IP address, browser type, device information, and pages visited on our website.</li>
+                    <li><strong>Communication Data:</strong> Records of correspondence when you contact our customer service team.</li>
+                    <li><strong>Preferences:</strong> Your shopping preferences and wishlist items.</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">How We Use Your Information</h3>
+                <p>We use your information for the following purposes:</p>
+                <ul>
+                    <li>To process and fulfill your orders</li>
+                    <li>To provide customer support and respond to your inquiries</li>
+                    <li>To personalize your shopping experience and recommend products</li>
+                    <li>To send you marketing communications (with your consent)</li>
+                    <li>To improve our website, products, and services</li>
+                    <li>To prevent fraud and enhance security</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">Data Sharing and Disclosure</h3>
+                <p>We value your privacy and do not sell your personal information to third parties. We may share your information with:</p>
+                <ul>
+                    <li><strong>Service Providers:</strong> Trusted partners who assist us in operating our website, processing payments, and delivering orders.</li>
+                    <li><strong>Legal Requirements:</strong> When required by law or to protect our rights, property, or safety.</li>
+                    <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of all or a portion of our assets.</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">Cookies and Tracking Technologies</h3>
+                <p>Our website uses cookies and similar technologies to enhance your browsing experience, analyze site traffic, and personalize content. You can control cookies through your browser settings, but please note that disabling cookies may limit your ability to use certain features of our website.</p>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">Your Rights and Choices</h3>
+                <p>You have the following rights regarding your personal information:</p>
+                <ul>
+                    <li><strong>Access:</strong> You can request access to the personal information we hold about you.</li>
+                    <li><strong>Correction:</strong> You can update or correct your personal information through your account settings.</li>
+                    <li><strong>Deletion:</strong> You can request deletion of your personal information, subject to certain exceptions.</li>
+                    <li><strong>Marketing Preferences:</strong> You can opt-out of marketing communications at any time by clicking the unsubscribe link in our emails.</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">Data Security</h3>
+                <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">Children's Privacy</h3>
+                <p>Our website is not intended for children under the age of 16. We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a child, please contact us immediately.</p>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">Changes to This Policy</h3>
+                <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by posting the updated policy on our website with a new effective date.</p>
+            </div>
+
+            <div class="privacy-section">
+                <h3 class="serif-font">Contact Us</h3>
+                <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact our Privacy Team:</p>
+                <ul>
+                    <li>Email: privacy@scotch-luxury.com</li>
+                    <li>Phone: +1 (212) 555-0123</li>
+                    <li>Address: 123 Luxury Avenue, New York, NY 10001, USA</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="serif-font">SCOTCH<span>LUXURY</span></h3>
+                    <p style="color: var(--text-secondary); margin-top: 20px;">Crafting the future of luxury with timeless design and innovative vision.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="serif-font">Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="serif-font">About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="serif-font">Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="store_policy.html">Store Policy</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Scotch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme toggle positioned at bottom right -->
+    <div class="theme-toggle-container">
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            document.body.classList.add('dark-mode');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

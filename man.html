@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scartch - Men's Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: #c19a6b; /* Gold tone for luxury */
+            --text-color: #333;
+            --light-bg: #f5f7f9;
+            --white: #ffffff;
+            --light-gray: #ecf0f1;
+            --gray: #bdc3c7;
+            --dark-gray: #7f8c8d;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --gold-gradient: linear-gradient(135deg, #c19a6b 0%, #d4af37 100%);
+        }
+
+        /* Dark mode variables */
+        [data-theme="dark"] {
+            --primary-color: #ecf0f1;
+            --secondary-color: #bdc3c7;
+            --text-color: #f5f7f9;
+            --light-bg: #1a1a1a;
+            --white: #2d2d2d;
+            --light-gray: #3d3d3d;
+            --gray: #555;
+            --dark-gray: #7f8c8d;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background: var(--light-bg);
+            padding: 30px 0;
+            margin-bottom: 40px;
+            transition: var(--transition);
+        }
+
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            background: var(--white);
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            cursor: pointer;
+            min-width: 150px;
+            transition: var(--transition);
+        }
+
+        /* Products Grid */
+        .products-section {
+            padding: 40px 0 80px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background: var(--white);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 5px 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-brand {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart, .wishlist {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .add-to-cart {
+            background: var(--primary-color);
+            color: var(--white);
+            flex: 2;
+            margin-right: 10px;
+        }
+
+        .add-to-cart:hover {
+            background: var(--accent-color);
+        }
+
+        .wishlist {
+            background: var(--light-gray);
+            color: var(--text-color);
+            flex: 1;
+        }
+
+        .wishlist:hover {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--light-gray);
+            padding: 60px 0 20px;
+            transition: var(--transition);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+            display: block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: 50%;
+        }
+
+        .social-links a:hover {
+            color: var(--white);
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray);
+            font-size: 14px;
+            color: var(--dark-gray);
+            transition: var(--transition);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                order: 1;
+            }
+            
+            .logo {
+                order: 2;
+                margin-left: 15px;
+            }
+            
+            .search-container {
+                order: 4;
+                max-width: 100%;
+                margin: 20px 0 0;
+            }
+            
+            nav {
+                order: 5;
+                width: 100%;
+                margin-top: 20px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .user-actions {
+                order: 3;
+                margin-left: auto;
+            }
+            
+            .filters-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .filter-select {
+                flex: 1;
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .filter-select {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 22px;
+            }
+            
+            .user-actions {
+                gap: 10px;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .theme-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="logo">
+                <img src="./assets/hermes-logo.jpg" alt="Scartch Luxury Logo">
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Discover luxury items...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" data-text="Home">Home</a></li>
+                    <li><a href="collections.html" data-text="Collections">Collections</a></li>
+                    <li><a href="designers.html" data-text="Designers">Designers</a></li>
+                    <li><a href="sale.html" data-text="Sale">Sale</a></li>
+                    <li><a href="journal.html" data-text="Journal">Journal</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="far fa-heart"></i>
+                        <div class="notification-bubble"></div>
+                    </div>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="action-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Bag</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Men's Collection</h1>
+                <p class="page-description">Discover our curated selection of luxury items for men. Handcrafted with exceptional materials and timeless designs.</p>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="filters-section">
+            <div class="container">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <span class="filter-label">Sort By</span>
+                        <select class="filter-select">
+                            <option>Featured</option>
+                            <option>Newest</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Name: A-Z</option>
+                            <option>Name: Z-A</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <span class="filter-label">Category</span>
+                        <select class="filter-select">
+                            <option>All Categories</option>
+                            <option>Watches</option>
+                            <option>Accessories</option>
+                            <option>Apparel</option>
+                            <option>Footwear</option>
+                            <option>Fragrance</option>
+                            <option>Bags</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <span class="filter-label">Designer</span>
+                        <select class="filter-select">
+                            <option>All Designers</option>
+                            <option>Rolex</option>
+                            <option>Tom Ford</option>
+                            <option>Hugo Boss</option>
+                            <option>Hermès</option>
+                            <option>Louis Vuitton</option>
+                            <option>Prada</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <span class="filter-label">Price</span>
+                        <select class="filter-select">
+                            <option>All Prices</option>
+                            <option>Under $500</option>
+                            <option>$500 - $1,000</option>
+                            <option>$1,000 - $2,000</option>
+                            <option>$2,000 - $5,000</option>
+                            <option>Over $5,000</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid -->
+        <section class="products-section">
+            <div class="container">
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://i.ebayimg.com/images/g/T1MAAOSwjyBkg8O7/s-l1600.jpg" alt="Rolex Watch" class="product-image">
+                            <span class="product-category">Watches</span>
+                        </div>
+                        <div class="product-info">
+                            <p class="product-brand">Rolex</p>
+                            <h3 class="product-name">Submariner Date Stainless Steel</h3>
+                            <p class="product-price">$8,950</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Bag</button>
+                                <button class="wishlist"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://i.etsystatic.com/23353584/r/il/c44f1f/2478562726/il_fullxfull.2478562726_4176.jpg" alt="Leather Wallet" class="product-image">
+                            <span class="product-category">Accessories</span>
+                        </div>
+                        <div class="product-info">
+                            <p class="product-brand">Hermès</p>
+                            <h3 class="product-name">Epsom Leather Wallet</h3>
+                            <p class="product-price">$1,150</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Bag</button>
+                                <button class="wishlist"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Leather Jacket" class="product-image">
+                            <span class="product-category">Apparel</span>
+                        </div>
+                        <div class="product-info">
+                            <p class="product-brand">Tom Ford</p>
+                            <h3 class="product-name">Classic Leather Jacket</h3>
+                            <p class="product-price">$4,200</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Bag</button>
+                                <button class="wishlist"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dress Shoes" class="product-image">
+                            <span class="product-category">Footwear</span>
+                        </div>
+                        <div class="product-info">
+                            <p class="product-brand">Hugo Boss</p>
+                            <h3 class="product-name">Leather Oxford Dress Shoes</h3>
+                            <p class="product-price">$595</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Bag</button>
+                                <button class="wishlist"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://scentchasers.com/wp-content/uploads/2022/09/Bleu-De-Chanel-2.png" alt="Cologne" class="product-image">
+                            <span class="product-category">Fragrance</span>
+                        </div>
+                        <div class="product-info">
+                            <p class="product-brand">Tom Ford</p>
+                            <h3 class="product-name">Oud Wood Eau de Parfum</h3>
+                            <p class="product-price">$240</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Bag</button>
+                                <button class="wishlist"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 6 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Leather Briefcase" class="product-image">
+                            <span class="product-category">Bags</span>
+                        </div>
+                        <div class="product-info">
+                            <p class="product-brand">Louis Vuitton</p>
+                            <h3 class="product-name">Classic Leather Briefcase</h3>
+                            <p class="product-price">$3,200</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Bag</button>
+                                <button class="wishlist"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="arrivels.html">New Arrivals</a></li>
+                        <li><a href="woman.html">Women</a></li>
+                        <li><a href="man.html">Men</a></li>
+                        <li><a href="assesories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="shipping_return.html">Shipping & Returns</a></li>
+                        <li><a href="store_policy.html">Store Policy</a></li>
+                        <li><a href="payment_methods.html">Payment Methods</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="size_guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Scartch Luxury. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+
+            // Check for saved theme preference or respect OS preference
+            const savedTheme = localStorage.getItem('theme') || 
+                               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            // Apply the saved theme
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.className = 'fas fa-moon';
+            }
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                
+                if (mainNav.classList.contains('active')) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+
+            // Theme toggle functionality
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.className = 'fas fa-moon';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.className = 'fas fa-sun';
+                }
+            });
+
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                    
+                    // Update cart count
+                    const cartCount = document.querySelector('.cart-count');
+                    cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                    
+                    // Show notification
+                    alert(`${productName} added to bag!`);
+                });
+            });
+
+            // Wishlist functionality
+            const wishlistButtons = document.querySelectorAll('.wishlist');
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                    
+                    if (this.classList.contains('active')) {
+                        this.innerHTML = '<i class="fas fa-heart"></i>';
+                        this.style.background = 'var(--accent-color)';
+                        this.style.color = 'var(--white)';
+                        alert(`${productName} added to wishlist!`);
+                    } else {
+                        this.innerHTML = '<i class="far fa-heart"></i>';
+                        this.style.background = 'var(--light-gray)';
+                        this.style.color = 'var(--text-color)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
